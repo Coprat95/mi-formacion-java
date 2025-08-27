@@ -58,8 +58,30 @@ Tecnologías ordenadas por relevancia actual en el mercado:
 - IntelliJ IDEA / Eclipse  
 - Maven / Gradle  
 - MySQL / H2  
-- Postman (para pruebas de APIs)  
+- Postman (para pruebas de APIs)
 
 ---
 
 ## 📁 Estructura del repositorio
+
+- **mi-formacion-java/**
+  - **Fundamentos/**
+    - Tema1/
+    - Tema2/
+    - ...
+   - **Enterprise/**
+    - SpringBoot/
+    - Hibernate/
+    - JakartaEE/
+    - JavaBeans/
+    
+  - **Web/**
+    - Servlets/
+    - JSP/
+    - JSF/
+  
+  - README.md
+
+
+
+
