@@ -26,10 +26,10 @@ public class JuegoAdivinarNumero {
                 // esCorrecto = false;  redundante, se puede omitir.
                 // Introducimos pistas para facilitar el juego
                 if (numeroUsuario > aleatorio) {
-                    System.out.println("El número introducido es mayor que el número secreto. ");
+                    System.out.println("El número es menor. ");
                 }
                 else {
-                    System.out.println("El número introducido es menor que el número secreto. ");
+                    System.out.println("El número es mayor. ");
                 }
             // Número de intentos por iteracion en caso de fallar
             System.out.printf("Número de intento " + i + "/5. El valor introducido %d no es correcto. ",numeroUsuario);
