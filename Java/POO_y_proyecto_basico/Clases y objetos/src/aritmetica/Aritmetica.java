@@ -1,4 +1,4 @@
-import java.io.FilterOutputStream;
+package aritmetica;
 
 public class Aritmetica {
     int operando1 ;
