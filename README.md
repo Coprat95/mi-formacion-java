@@ -63,6 +63,7 @@ Tecnologías ordenadas por relevancia actual en el mercado:
 ---
 
 ## 📁 Estructura del repositorio
+```
 
 mi-formacion-java/
 ├── 01-Fundamentos-Java
@@ -79,6 +80,8 @@ mi-formacion-java/
 ├── 12-Proyectos Finales
 ├── 13-Tecnologías Legacy (opcional)
 └── README.md
+```
+
 
 
 
