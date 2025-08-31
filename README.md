@@ -63,24 +63,26 @@ Tecnologías ordenadas por relevancia actual en el mercado:
 ---
 
 ## 📁 Estructura del repositorio
+```
 
-- **mi-formacion-java/**
-  - **Fundamentos/**
-    - Tema1/
-    - Tema2/
-    - ...
-   - **Enterprise/**
-    - SpringBoot/
-    - Hibernate/
-    - JakartaEE/
-    - JavaBeans/
-    
-  - **Web/**
-    - Servlets/
-    - JSP/
-    - JSF/
-  
-  - README.md
+mi-formacion-java/
+├── 01-Fundamentos-Java
+├── 02-POO y Proyecto Básico
+├── 03-Java Avanzado
+├── 04-Colecciones y Generics
+├── 05-Manejo de Archivos
+├── 06-JDBC y Bases de Datos
+├── 07-Spring Boot
+├── 08-Hibernate y JPA
+├── 09-Testing y Calidad
+├── 10-FullStack con Angular
+├── 11-FullStack con React
+├── 12-Proyectos Finales
+├── 13-Tecnologías Legacy (opcional)
+└── README.md
+```
+
+
 
 
 
