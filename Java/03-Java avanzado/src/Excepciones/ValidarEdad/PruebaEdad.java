@@ -11,7 +11,7 @@ public class PruebaEdad {
     public static void main(String[] args) {
         Scanner scanner = new Scanner ( System.in);
         ValidadorEdad validador1 = new ValidadorEdad();
-        System.out.println("Introduzca su edad: ");
+        System.out.println("Introduzca su");
         try {
             validador1.validar(scanner.nextInt());
         } catch  (EdadInvalidaException e ) {
