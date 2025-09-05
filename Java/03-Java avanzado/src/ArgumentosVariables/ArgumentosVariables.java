@@ -1,3 +1,5 @@
+package ArgumentosVariables;
+
 import java.util.Arrays;
 
 public class ArgumentosVariables {
