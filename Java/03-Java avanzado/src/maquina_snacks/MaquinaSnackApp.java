@@ -1,4 +1,4 @@
-package maquina_snacks_Oliver4;
+package maquina_snacks;
 
 import java.util.ArrayList;
 import java.util.List;

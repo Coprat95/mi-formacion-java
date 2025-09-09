@@ -3,28 +3,24 @@ package maquina_snacks;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Snack implements Serializable {  // lo hacemos JavaBeans ya que vamos a
-                                              // instanciar objetos de ella
- // Atributos del snack
-    private static int contadorSnacks = 0;
-    private int idSnack;
-    private String nombre;
-    private double precio;
-// Por cada instancia de objeto se genera un id nuevo .
-    public Snack () { // constructor vacío al ser JavaBeans
-        this.idSnack = ++contadorSnacks;
-    }
-    public Snack (String nombre, double precio ){
-        this(); // llama al constructor vacío  primero.
+public class Snack implements Serializable {
+private static int contador = 0;
+private int id;
+private String nombre;
+private double precio;
+
+    public Snack (){}
+    public Snack (String nombre, double precio ) {
+        this.id = ++contador;
         this.nombre = nombre;
         this.precio = precio;
-
-    }
-// Getters & Setters
-    public  int getIdSnack() {
-        return idSnack;
     }
 
+    // Getters & Setters
+
+    public int getId() {
+        return id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -42,26 +38,29 @@ public class Snack implements Serializable {  // lo hacemos JavaBeans ya que vam
         this.precio = precio;
     }
 
-    // Metodos toString, equals y HashCode para optimizar a la hora de buscar los snacks en lista
+    // mostrarSnack / toString
+    // Cuando hagamos un System.out.println(snack) saldrá con el formato siguiente:
+    public String mostrarSnack() {
+       return String.format("ID : %d | Nombre : %s, precio : %.2f €",
+               getId(),getNombre(),getPrecio());
+    }
 
     @Override
     public String toString() {
-        return "Snack{" +
-                "idSnack=" + idSnack +
-                ", nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                '}';
+        return mostrarSnack();
     }
+
+    // Equals y hashCode
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Snack snack = (Snack) o;
-        return idSnack == snack.idSnack && Double.compare(precio, snack.precio) == 0 && Objects.equals(nombre, snack.nombre);
+        return id == snack.id && Double.compare(precio, snack.precio) == 0 && Objects.equals(nombre, snack.nombre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSnack, nombre, precio);
+        return Objects.hash(id, nombre, precio);
     }
 }
