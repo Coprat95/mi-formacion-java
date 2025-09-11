@@ -1,4 +1,4 @@
-package prueba_maquina.maquina_snacks;
+package Maquina_Snacks;
 
 import java.io.Serializable;
 import java.util.Objects;
