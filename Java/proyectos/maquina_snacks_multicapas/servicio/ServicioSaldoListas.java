@@ -1,6 +1,6 @@
-package maquina_snacks_archivos.servicio;
+package maquina_snacks_multicapas.servicio;
 
-import maquina_snacks_archivos.dominio.Saldo;
+import maquina_snacks_multicapas.dominio.Saldo;
 
 public class ServicioSaldoListas implements IServicioSaldo{
     private final Saldo saldo = new Saldo();

@@ -1,4 +1,4 @@
-package maquina_snacks_archivos.dominio;
+package maquina_snacks_multicapas.dominio;
 
 public class Saldo {
     private  double saldoDisponible ;

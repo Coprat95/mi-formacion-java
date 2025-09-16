@@ -1,7 +1,7 @@
-package maquina_snacks_archivos.presentacion;
+package maquina_snacks_multicapas.presentacion;
 
-import maquina_snacks_archivos.dominio.Snack;
-import maquina_snacks_archivos.servicio.*;
+import maquina_snacks_multicapas.dominio.Snack;
+import maquina_snacks_multicapas.servicio.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,19 @@ public class MaquinaSnackApp {
     List<Snack> carritoCompra;
     // Usaremos tanto servicioSaldo como servicioInventario para sustituir las clases
     // Saldo e Inventario y así poder separar bien lo lógico de lo funcional (arquitectura por capas).
-    private final IServicioSaldo servicioSaldo;
-    private final IServicioInventario servicioInventario;
+    //private final IServicioSaldo servicioSaldo;
+    private final IServicioSaldo servicioSaldoArchivos;
+    // private final IServicioInventario servicioInventarioListas;
+    private final IServicioInventario servicioInventarioArchivos;
     private final IEntradaUsuario entradaUsuario;
     // Constructor. Inicia el inventario
     public MaquinaSnackApp() {
         scanner = new Scanner(System.in);
         carritoCompra = new ArrayList<>();
-        servicioSaldo = new ServicioSaldoListas();
-        servicioInventario = new ServicioInventarioListas();
+        servicioSaldoArchivos = new ServicioSaldoArchivos();
+        //servicioInventarioListas = new ServicioInventarioListas(); // Lo comentamos , estamos trabajando con Archivos ahora
+        servicioInventarioArchivos = new ServicioInventarioArchivos();
+
         entradaUsuario = new EntradaUsuario();
 
     }
@@ -29,7 +33,7 @@ public class MaquinaSnackApp {
     public void iniciar() {
         boolean salir = false;
         while (!salir) {
-            servicioInventario.mostrarInventario();
+            servicioInventarioArchivos.mostrarInventario();
             mostrarMenu();
             salir = ejecutarOpciones();  // al ser ejecutarOpciones return boolean , podemos hacer que acabe el bucle
 
@@ -46,7 +50,7 @@ public class MaquinaSnackApp {
                     4- Añadir saldo
                     5- Salir
                     
-                    """,servicioSaldo.getSaldoDisponible());
+                    """,servicioSaldoArchivos.getSaldoDisponible());
 
         }
         public boolean ejecutarOpciones(){
@@ -56,7 +60,7 @@ public class MaquinaSnackApp {
                 case 1 -> comprarSnack();
                 case 2 -> mostrarTicket();
                 case 3 -> agregarSnack();
-                case 4 -> servicioSaldo.agregarSaldo(entradaUsuario.leerDouble("¿Cuanto saldo desea " +
+                case 4 -> servicioSaldoArchivos.agregarSaldo(entradaUsuario.leerDouble("¿Cuanto saldo desea " +
                         " añadir (máximo 50€) ? "));
                 case 5 -> {
                     System.out.println("Gracias. Hasta pronto!");
@@ -67,29 +71,20 @@ public class MaquinaSnackApp {
             }
            return false;
         }
+        // metodo comprarSnack de la capa de presentación que llama al de la capa de negocio
+        // podría tener otro nombre como invocarComprarSnack()
     public void comprarSnack() {
-     int id = entradaUsuario.leerEntero("Introduzca el id del snack que quiera comprar. ");
-     Snack snack  = servicioInventario.buscarPorId(id);
-     if (snack == null) {
-         System.out.println("El id introducido no corresponde con ningún snack.");
-         return;
-     }
-     if(snack.getPrecio() > servicioSaldo.getSaldoDisponible()) {
-         System.out.println("No se ha podido realizar la compra. Saldo insuficiente.");
-         return;
-     }
-     if (!snack.descontarStock()) {  // Si no puedes descontar stock cancela la compra
-         // si hay stock (true)      será falso por el !snack.     NO entra el if
-         // si no hay stock (false)  será verdadero por el !snack. SI entra el if.
-         System.out.println("No se ha podido realizar la compra. Stock insuficiente.");
-         return;
-     }
+        int id = entradaUsuario.leerEntero("Introduzca el ID del snack que desea comprar: ");
+        double saldo = servicioSaldoArchivos.getSaldoDisponible();
 
-      servicioSaldo.descontarSaldo((snack.getPrecio()));
-     carritoCompra.add(snack);
-        System.out.println("Ha comprado " + snack.getNombre());
-     }
+        if (servicioInventarioArchivos.comprarSnack(id,saldo)) {
+            Snack snack = servicioInventarioArchivos.buscarPorId(id);
+            servicioSaldoArchivos.descontarSaldo(snack.getPrecio());
+            carritoCompra.add(snack);
+        }
 
+
+    }
 
     public void mostrarTicket(){
         double total = 0;
@@ -105,7 +100,7 @@ public class MaquinaSnackApp {
                 Total de la compra:
                 - %.2f
                 """,total);
-        System.out.printf("\nSaldo restante: %.2f\n",servicioSaldo.getSaldoDisponible());
+        System.out.printf("\nSaldo restante: %.2f\n",servicioSaldoArchivos.getSaldoDisponible());
         System.out.println("\nGracias por su compra.");
     }
 
@@ -113,7 +108,7 @@ public class MaquinaSnackApp {
         var nombre = entradaUsuario.leerCadena("Introduzca el nombre del snack: ");
         var precio = entradaUsuario.leerDouble("Introduzca el precio del snack: ");
         var stock = entradaUsuario.leerEntero("Introduzca la cantidad de stock: ");
-        servicioInventario.agregarSnack(nombre,precio,stock);
+        servicioInventarioArchivos.agregarSnack(nombre,precio,stock);
         System.out.println("Ha agregado el snack "+ nombre);
     }
 

@@ -1,0 +1,4 @@
+1,Chocolate,1.30,0
+2,Patatas,1.80,3
+3,Refresco,1.50,5
+4,Sandwich,3.10,2

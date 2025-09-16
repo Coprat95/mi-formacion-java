@@ -1,4 +1,4 @@
-package maquina_snacks_archivos.servicio;
+package maquina_snacks_multicapas.servicio;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package maquina_snacks_archivos.dominio;
+package maquina_snacks_multicapas.dominio;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,12 +11,26 @@ private double precio;
 private int stock;
 
     public Snack (){}
+    // Constructor  con id que se genera automáticamente
     public Snack (String nombre, double precio, int stock ) {
-        this.id = ++contador;
+        this.id = ++contador ;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
     }
+
+    // Constructor con id explícito (para cargar desde archivo)
+    public Snack (String nombre, double precio, int stock, int id ) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        if (id >= contador) {
+            contador = id +1;
+        }
+    }
+
+
 
     // Getters & Setters
 
@@ -59,10 +73,15 @@ private int stock;
         return false;
     }
 
+    // metodo para reiniciar contador
+    public static void reiniciarContador(){
+        contador = 0;
+    }
+
     // mostrarSnack / toString
     // Cuando hagamos un System.out.println(snack) saldrá con el formato siguiente:
     public String mostrarSnack() {
-       return String.format("ID : %d | Nombre : %s, precio : %.2f €. Stock restante: %d",
+       return String.format("ID: %d | Nombre: %s | precio: %.2f € | Stock restante: %d",
                getId(),getNombre(),getPrecio(),getStock());
     }
 
